@@ -1,0 +1,56 @@
+/**
+ * The following styles get applied inside the editor only.
+ */
+
+/* Editor styles for inline formats */
+q {
+	background-color: rgba(33, 117, 155, 0.1);
+	border-radius: 2px;
+	padding: 0 2px;
+}
+
+cite {
+	background-color: rgba(155, 81, 224, 0.1);
+	border-radius: 2px;
+	padding: 0 2px;
+}
+
+span {
+	background-color: rgba(100, 100, 100, 0.1);
+	border-radius: 2px;
+	padding: 0 2px;
+}
+
+dfn {
+	background-color: rgba(46, 204, 113, 0.1);
+	border-radius: 2px;
+	padding: 0 2px;
+	font-style: normal!important;
+}
+
+abbr {
+	background-color: rgba(245, 166, 35, 0.1);
+	border-radius: 2px;
+	padding: 0 2px;
+	border-bottom: 1px dotted #f5a623;
+	cursor: help;
+}
+
+/* Active button styling with background color */
+.block-editor-format-toolbar button.is-pressed,
+.components-toolbar button.is-pressed {
+	background-color: #DFE7ED !important;
+}
+
+button.components-button.components-dropdown-menu__menu-item.is-active.is-next-40px-default-size.has-text.has-icon {
+	background: #DFE7ED;
+}
+
+/* Styled popover for abbreviation */
+.abbr-popover {
+	z-index: 1000000;
+	
+	.components-text-control__input {
+		width: 100%;
+	}
+}
