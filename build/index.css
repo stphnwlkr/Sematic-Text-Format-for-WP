@@ -1,1 +1,44 @@
-q{background-color:rgba(33,117,155,.1)}cite,q{border-radius:2px;padding:0 2px}cite{background-color:rgba(155,81,224,.1)}dfn{background-color:rgba(46,204,113,.1);font-style:normal!important}abbr,dfn{border-radius:2px;padding:0 2px}abbr{background-color:rgba(245,166,35,.1);border-bottom:1px dotted #f5a623;cursor:help}.block-editor-format-toolbar button.is-pressed,.components-toolbar button.is-pressed{background-color:#dfe7ed!important}button.components-button.components-dropdown-menu__menu-item.is-active.is-next-40px-default-size.has-text.has-icon{background:#dfe7ed}.abbr-popover,.quote-attributes-popover{z-index:1000000}.abbr-popover .components-text-control__input,.quote-attributes-popover .components-text-control__input{width:100%}
+q {
+    background-color: rgba(33, 117, 155, .1)
+}
+
+cite, q {
+    border-radius: 2px;
+    padding: 0 2px
+}
+
+cite {
+    background-color: rgba(155, 81, 224, .1)
+}
+
+dfn {
+    background-color: rgba(46, 204, 113, .1);
+    font-style: normal !important
+}
+
+abbr, dfn {
+    border-radius: 2px;
+    padding: 0 2px
+}
+
+abbr {
+    background-color: rgba(245, 166, 35, .1);
+    border-bottom: 1px dotted #f5a623;
+    cursor: help
+}
+
+.block-editor-format-toolbar button.is-pressed, .components-toolbar button.is-pressed {
+    background-color: #dfe7ed !important
+}
+
+button.components-button.components-dropdown-menu__menu-item.is-active.is-next-40px-default-size.has-text.has-icon {
+    background: #dfe7ed
+}
+
+.abbr-popover, .quote-attributes-popover {
+    z-index: 1000000
+}
+
+.abbr-popover .components-text-control__input, .quote-attributes-popover .components-text-control__input {
+    width: 100%
+}
