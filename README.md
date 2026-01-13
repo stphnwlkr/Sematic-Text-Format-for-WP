@@ -1,34 +1,32 @@
-=== Semantic Text Formats ===
+=== Semantic Text Formats for WP ===
 
-Contributors:      Telex
-Tags:              block, semantic, quote, citation, abbreviation, span, definition
+Contributors:      Telex - https://telex.automattic.ai/projects/85965f99
+Tags:              semantic, quote, citation, abbreviation, definition
 Tested up to:      6.8
-Stable tag:        1.0.0
+Stable tag:        1.1.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Author:            Stephen Walker
 Plugin URI:        https://flyingw.press
-Enhance your content with semantic HTML elements for quotes, citations, abbreviations, spans, and definitions.
+Enhance your content with semantic HTML elements for quotes, citations, abbreviations, and definitions.
 
 == Description ==
 
 Semantic Text Formats extends WordPress with proper semantic HTML elements for better content structure and SEO. This plugin provides:
 
 **Paragraph Block Enhancements:**
-- Inline Quote (`<q>`) formatting option
+- Inline Quote (`<q>`) formatting option with optional language attribute and citation URL
 - Citation (`<cite>`) formatting option
 - Abbreviation (`<abbr>`) formatting option with title attribute
-- Span (`<span>`) formatting option
 - Definition (`<dfn>`) formatting option
 
 These options appear in the paragraph block toolbar alongside bold, italic, and other text formatting controls, allowing you to wrap selected text with proper semantic markup.
 
 == Features ==
 
-* **Inline Quote**: Wrap text in `<q>` tags for short inline quotations with proper semantic meaning
+* **Inline Quote**: Wrap text in `<q>` tags for short inline quotations with proper semantic meaning, with optional language attribute and citation URL for internationalization
 * **Citation**: Mark up titles of works, authors, or sources using `<cite>` tags
 * **Abbreviation**: Add abbreviations with their full forms using `<abbr>` tags with title attributes - click on existing abbreviations to edit or remove them
-* **Span**: Wrap text in `<span>` tags for generic inline styling or scripting hooks
 * **Definition**: Mark up terms being defined using `<dfn>` tags
 * **Fully Accessible**: All elements use proper ARIA labels and semantic HTML
 * **No Front-end Styling**: Clean markup without any forced styles, letting your theme handle the presentation
@@ -45,16 +43,13 @@ These options appear in the paragraph block toolbar alongside bold, italic, and 
 1. Select text in a paragraph block
 2. Click the "Quote" button in the toolbar (quotation mark icon)
 3. The text will be wrapped in `<q>` tags
+4. A popup will appear where you can optionally add a language code and citation URL
+5. Click "Apply" to save or "Cancel" to close
 
 **Adding a Citation:**
 1. Select text in a paragraph block
 2. Click the "Cite" button in the toolbar (document icon)
 3. The text will be wrapped in `<cite>` tags
-
-**Adding a Span:**
-1. Select text in a paragraph block
-2. Click the "Span" button in the toolbar (text icon)
-3. The text will be wrapped in `<span>` tags
 
 **Adding a Definition:**
 1. Select text in a paragraph block
@@ -73,11 +68,11 @@ These options appear in the paragraph block toolbar alongside bold, italic, and 
 
 = Why use semantic HTML elements? =
 
-Semantic HTML improves accessibility, SEO, and content structure. Elements like `<q>`, `<cite>`, `<abbr>`, `<span>`, and `<dfn>` provide meaningful context to browsers, search engines, and assistive technologies.
+Semantic HTML improves accessibility, SEO, and content structure. Elements like `<q>`, `<cite>`, `<abbr>`, and `<dfn>` provide meaningful context to browsers, search engines, and assistive technologies.
 
 = Can I style these elements? =
 
-Yes! The plugin doesn't add any front-end styles, so you have complete control. Add custom CSS targeting `q`, `cite`, `abbr`, `span`, and `dfn` elements to match your theme.
+Yes! The plugin doesn't add any front-end styles, so you have complete control. Add custom CSS targeting `q`, `cite`, `abbr`, and `dfn` to match your theme.
 
 = Do the formatting options work with existing paragraph blocks? =
 
@@ -87,26 +82,38 @@ Yes! Once activated, the options are available in all paragraph blocks throughou
 
 Simply click on the abbreviation in the editor (the button will be highlighted), and the popup will appear with the current title text. You can update it or remove the abbreviation entirely.
 
+= How do I add a language to a quote? =
+
+When you apply the quote format to your text, a popup will appear where you can enter an ISO 639-1 language code (e.g., 'fr' for French, 'es' for Spanish) and optionally a citation URL.
+
 == Screenshots ==
 
 1. Inline formatting buttons in the paragraph block toolbar
 2. Abbreviation popup for entering or editing the full form
-3. Front-end display of semantic text formats
+3. Quote language and citation popup for internationalization
+4. Front-end display of semantic text formats
 
 == Changelog ==
 
+= 1.1.0 =
+* Added language attribute support for inline quotes
+* Added citation URL support for inline quotes
+* Fixed quote format not preserving when adding attributes
+* Improved quote popup workflow
+
 = 1.0.0 =
 * Updated to version 1.0.0
+* Changed namespace from telex to fw
 * Updated author and contributor information
 * Removed definition list block to focus on inline formats only
-* Added span and dfn inline format options
+* Added dfn inline format option
 * Removed front-end styling
 * Added ability to edit existing abbreviations by clicking on them
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Major update focusing on inline text formatting with new span and dfn options, plus improved abbreviation editing.
+= 1.1.0 =
+Adds language attribute and citation URL support for inline quotes.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

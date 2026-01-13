@@ -3,7 +3,7 @@
  * Plugin Name:       Semantic Text Formats
  * Plugin URI:        https://flyingw.press
  * Description:       Adds inline quote, citation, and abbreviation formatting to paragraph blocks
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 6.1
  * Requires PHP:      7.4
  * Author:            Stephen Walker
