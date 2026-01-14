@@ -3,12 +3,12 @@
 - Contributors:      Telex - https://telex.automattic.ai/projects/85965f99
 - Tags:              semantic, quote, citation, abbreviation, definition
 - Tested up to:      6.8
-- Stable tag:        1.1.0
+- Stable tag:        1.6.0
 - License:           GPLv2 or later
 - License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 - Author:            Stephen Walker
 - Plugin URI:        https://flyingw.press
-- Enhance your content with semantic HTML elements for quotes, citations, abbreviations, and definitions.
+
 
 **Semantic Text Format** extends the WordPress Block Editor (Gutenberg) with additional **semantic inline text formats**, so authors can mark up content correctly without custom blocks, shortcodes, or inline styles.
 
