@@ -1,202 +1,131 @@
-# Semantic Text Format for WordPress
+=== Semantic Text Formats for WP ===
 
-- Contributors:      Telex - https://telex.automattic.ai/projects/85965f99
-- Tags:              semantic, quote, citation, abbreviation, definition
-- Tested up to:      6.8
-- Stable tag:        1.6.0
-- License:           GPLv2 or later
-- License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-- Author:            Stephen Walker
-- Plugin URI:        https://flyingw.press
+Contributors:      Telex - https://telex.automattic.ai/projects/85965f99
+Tags:              semantic, quote, citation, abbreviation, definition
+Tested up to:      6.9
+Stable tag:        1.5.0
+License:           GPLv2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Author:            Stephen Walker
+Plugin URI:        https://flyingw.press
+Enhance your content with semantic HTML elements for quotes, citations, abbreviations, and definitions.
 
+== Description ==
 
-**Semantic Text Format** extends the WordPress Block Editor (Gutenberg) with additional **semantic inline text formats**, so authors can mark up content correctly without custom blocks, shortcodes, or inline styles.
+Semantic Text Formats extends WordPress with proper semantic HTML elements for better content structure and SEO. This plugin provides:
 
-This plugin improves **accessibility**, **clarity**, and **editorial quality** by encouraging semantic HTML that works well with screen readers, search engines, and modern CSS.
+**Paragraph Block Enhancements:**
+- Inline Quote (`<q>`) formatting option with optional language attribute and citation URL
+- Citation (`<cite>`) formatting option
+- Abbreviation (`<abbr>`) formatting option with title attribute
+- Definition (`<dfn>`) formatting option
 
----
+These options appear in the paragraph block toolbar alongside bold, italic, and other text formatting controls, allowing you to wrap selected text with proper semantic markup.
 
-## Features
+**New Block:**
+- **Semantic Blockquote**: A dedicated block that outputs a semantic structure using `<figure>`, `<blockquote>`, and an optional `<figcaption>`. The figcaption area supports full Paragraph block editing (links, inline formats, etc.).
 
-Adds the following inline formats to the RichText toolbar in supported blocks (Paragraph, Heading, List, etc.):
+== Features ==
 
-- **Abbreviation** (`<abbr>`)
-- **Cite** (`<cite>`)
-- **Definition** (`<dfn>`)
-- **Inline Quote** (`<q>`)
-- **Inline Span (Custom Class)** (`<span class="…">`)
+* **Inline Quote**: Wrap text in `<q>` tags for short inline quotations with proper semantic meaning, with optional language attribute and citation URL for internationalization
+* **Citation**: Mark up titles of works, authors, or sources using `<cite>` tags
+* **Abbreviation**: Add abbreviations with their full forms using `<abbr>` tags with title attributes - click on existing abbreviations to edit or remove them
+* **Definition**: Mark up terms being defined using `<dfn>` tags
+* **Fully Accessible**: All elements use proper ARIA labels and semantic HTML
+* **No Front-end Styling**: Clean markup without any forced styles, letting your theme handle the presentation
 
-All formats are implemented using the native Gutenberg `registerFormatType` API and integrate into the standard editor toolbar.
+== Installation ==
 
----
+1. Upload the plugin files to the `/wp-content/plugins/semantic-text-formats` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress
+3. The inline formatting options will automatically appear in the paragraph block toolbar
 
-## Format guide: proper use, accessibility, best practices
+== Usage ==
 
-### Abbreviation (`<abbr>`)
+**Adding an Inline Quote:**
+1. Select text in a paragraph block
+2. Click the "Quote" button in the toolbar (quotation mark icon)
+3. The text will be wrapped in `<q>` tags
+4. A popup will appear where you can optionally add a language code and citation URL
+5. Click "Apply" to save or "Cancel" to close
 
-**Use for:** acronyms/abbreviations that benefit from an expansion, especially on first use.
+**Adding a Citation:**
+1. Select text in a paragraph block
+2. Click the "Cite" button in the toolbar (document icon)
+3. The text will be wrapped in `<cite>` tags
 
-**Example output**
+**Adding a Definition:**
+1. Select text in a paragraph block
+2. Click the "Definition" button in the toolbar (book icon)
+3. The text will be wrapped in `<dfn>` tags
 
-```html
-<abbr title="the Department of Veterans Affairs">VA</abbr>
-```
+**Adding an Abbreviation:**
+1. Select text in a paragraph block
+2. Click the "Abbreviation" button in the toolbar (info icon)
+3. Enter the full form of the abbreviation in the popup
+4. Click "Apply"
+5. The text will be wrapped in `<abbr>` tags with the full form as the title attribute
+6. To edit an existing abbreviation, click on it again and update the title or remove it
 
-**Accessibility / best practices**
+== Frequently Asked Questions ==
 
-- Always provide a meaningful `title` (the expansion).
-- Don’t use `<abbr>` just to style text.
-- Avoid repeating the same expansion on every instance—use it where it helps comprehension.
+= Why use semantic HTML elements? =
 
----
+Semantic HTML improves accessibility, SEO, and content structure. Elements like `<q>`, `<cite>`, `<abbr>`, and `<dfn>` provide meaningful context to browsers, search engines, and assistive technologies.
 
-### Cite (`<cite>`)
+= Can I style these elements? =
 
-**Use for:** **titles of works** (books, reports, publications, articles, journals, films, etc.).
+Yes! The plugin doesn't add any front-end styles, so you have complete control. Add custom CSS targeting `q`, `cite`, `abbr`, and `dfn` to match your theme.
 
-**Example output**
+= Do the formatting options work with existing paragraph blocks? =
 
-```html
-<cite>The Federal Register</cite>
-```
+Yes! Once activated, the options are available in all paragraph blocks throughout your site.
 
-**Accessibility / best practices**
+= How do I edit an existing abbreviation? =
 
-- Use for a work’s title, not an author name or URL.
-- Don’t use `<cite>` as a general “italic” style.
+Simply click on the abbreviation in the editor (the button will be highlighted), and the popup will appear with the current title text. You can update it or remove the abbreviation entirely.
 
----
+= How do I add a language to a quote? =
 
-### Definition (`<dfn>`)
+When you apply the quote format to your text, a popup will appear where you can enter an ISO 639-1 language code (e.g., 'fr' for French, 'es' for Spanish) and optionally a citation URL.
 
-**Use for:** the term being defined in context (often the first time a term is introduced).
+== Screenshots ==
 
-**Example output**
+1. Inline formatting buttons in the paragraph block toolbar
+2. Abbreviation popup for entering or editing the full form
+3. Quote language and citation popup for internationalization
+4. Front-end display of semantic text formats
 
-```html
-<dfn>Eligibility determination</dfn> is the process by which benefits are assessed.
-```
+== Changelog ==
 
-**Accessibility / best practices**
-
-- Use for the *defining instance* of the term.
-- Don’t wrap every repeat occurrence of the term.
-
----
-
-### Inline Quote (`<q>`)
-
-**Use for:** short quotations that sit *within* a sentence/paragraph.
-
-**Example output**
-
-```html
-<q>Service before self</q>
-```
-
-**Accessibility / best practices**
-
-- Prefer `<q>` for short inline quotes; use `<blockquote>` for longer standalone quotes.
-- Avoid adding manual quotation marks—HTML handles quoting semantics.
-
----
-
-### Inline Span (Custom Class) (`<span>`)
-
-**Use for:** when no semantic element fits and you need a CSS/JS hook.
-
-**Example output**
-
-```html
-<span class="stf-inline-span highlight">Important phrase</span>
-```
-
-**Important note**
-
-This format uses an internal base class (`stf-inline-span`) so Gutenberg can reliably recognize the format and to avoid collisions with core formats that also use `<span>`. You only manage your custom classes in the UI.
-
-**Accessibility / best practices**
-
-- `<span>` adds **no meaning**. Prefer semantic elements first (`<abbr>`, `<dfn>`, `<q>`, etc.).
-- Don’t rely on color alone to convey meaning; ensure adequate contrast.
-- Keep custom classes purposeful and documented.
-
----
-
-## Author style guide snippet
-
-Use this snippet in your editorial/style documentation to guide consistent authoring:
-
-### Inline semantics quick rules
-
-- Use **Abbreviation** for acronyms the first time they appear (e.g., “VA” → “Department of Veterans Affairs”).
-- Use **Definition** when you’re introducing a term and immediately defining it.
-- Use **Inline Quote** for short quotes inside a sentence; use a block quote pattern for longer quotes.
-- Use **Cite** only for the *title of a work* (report, book, article), not the author or website name.
-- Use **Inline Span (Class)** only when you need a styling or scripting hook and **no semantic element applies**.
-
-### Accessibility checklist for inline styling
-
-- Don’t communicate meaning with **color alone** (add text, icons with labels, or other cues).
-- Ensure any highlighted text maintains **sufficient contrast**.
-- Avoid adding extra punctuation or quote marks for visual effect—use the proper semantic format instead.
-- Keep class names short, consistent, and reusable (e.g., `highlight`, `callout`, `flag`, `kbd`).
-
----
-
-## Requirements
-
-- **WordPress:** 6.8 or later  
-- **Tested up to:** 6.9  
-- **PHP:** 7.4 or later  
-- **Editor:** Block Editor (Gutenberg)
-
-Classic Editor is not supported.
-
----
-
-## Installation
-
-1. Upload the plugin folder to `/wp-content/plugins/`
-2. Activate **Semantic Text Format** from the Plugins screen
-3. Open the Block Editor and select text in a supported block
-4. Use the RichText toolbar dropdown to apply a format
-
----
-
-## Accessibility commitment
-
-This plugin is designed with accessibility as a core principle:
-
-- Uses native semantic HTML elements
-- Keyboard accessible
-- Screen reader compatible
-- No front-end JavaScript required
-- Encourages WCAG-aligned authoring practices
-
----
-
-## Development notes
-
-- Formats register client-side via the Gutenberg API.
-- Editor assets should be cache-busted to prevent stale builds.
-- No server-side content filtering is performed.
-
----
-
-## Changelog
-
-### 1.1.6
-- Fixed duplicate Inline Span base class behavior
-- Avoided conflicts with core underline format registration
-- Improved class handling and editor behavior
-- Documentation expanded with accessibility and best practices
-
----
-
-## License
-
-GPL-2.0-or-later
+= 1.5.0 =
+* Added the **Semantic Blockquote** block that outputs `<figure><blockquote>…</blockquote><figcaption>…</figcaption></figure>`.
+* Figcaption content uses real blocks (Paragraph, Heading, List), enabling links and other inline formatting.
+* Added a toggle to include/remove the figcaption wrapper.
+* Version correction
+
+= 1.1.0 =
+* Added language attribute support for inline quotes
+* Added citation URL support for inline quotes
+* Fixed quote format not preserving when adding attributes
+* Improved quote popup workflow
+
+= 1.0.0 =
+* Updated to version 1.0.0
+* Changed namespace from telex to fw
+* Updated author and contributor information
+* Removed definition list block to focus on inline formats only
+* Added dfn inline format option
+* Removed front-end styling
+* Added ability to edit existing abbreviations by clicking on them
+
+== Upgrade Notice ==
+
+= 1.5.0 =
+Adds the Semantic Blockquote block (figure + blockquote + optional figcaption).
+
+= 1.1.0 =
+Adds language attribute and citation URL support for inline quotes.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

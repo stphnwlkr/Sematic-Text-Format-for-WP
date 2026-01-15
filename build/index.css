@@ -3,3 +3,8 @@ q{background-color:rgba(33,117,155,.1)}cite,q{border-radius:2px;padding:0 2px}ci
 
 /* Inline Span popover */
 .stf-inline-span-popover{z-index:100000;}
+
+/* Semantic Blockquote (editor helpers) */
+.wp-block-semantic-text-formats-semantic-blockquote{margin:0}
+.wp-block-semantic-text-formats-semantic-blockquote .stf-semantic-blockquote__blockquote{margin:0}
+.wp-block-semantic-text-formats-semantic-blockquote .stf-semantic-blockquote__figcaption{margin-top:.5em;opacity:.85}
