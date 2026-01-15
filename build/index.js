@@ -186,12 +186,13 @@ function buildUserClass(userInput) {
       html: false,
       inserter: false,
       lock: false,
+      className: false,
     },
     edit: function (props) {
-      var blockProps = useBlockProps({ className: 'stf-semantic-blockquote__blockquote' });
+      // Keep the markup clean: no block-specific class names on the blockquote wrapper.
       return wp.element.createElement(
         'blockquote',
-        blockProps,
+        null,
         wp.element.createElement(InnerBlocks, {
           allowedBlocks: ['core/paragraph', 'core/heading', 'core/list'],
           template: [['core/paragraph', { placeholder: __('Add quote…', 'semantic-text-formats') }]],
@@ -200,10 +201,9 @@ function buildUserClass(userInput) {
       );
     },
     save: function () {
-      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'stf-semantic-blockquote__blockquote' });
       return wp.element.createElement(
         'blockquote',
-        blockProps,
+        null,
         wp.element.createElement(InnerBlocks.Content, null)
       );
     },
@@ -221,12 +221,12 @@ function buildUserClass(userInput) {
       html: false,
       inserter: false,
       lock: false,
+      className: false,
     },
     edit: function () {
-      var blockProps = useBlockProps({ className: 'stf-semantic-blockquote__figcaption' });
       return wp.element.createElement(
         'figcaption',
-        blockProps,
+        { className: 'wp-semantic-figure__caption' },
         wp.element.createElement(InnerBlocks, {
           // Full paragraph block functionality (and any inline formats allowed by that block).
           allowedBlocks: ['core/paragraph', 'core/heading', 'core/list'],
@@ -236,10 +236,9 @@ function buildUserClass(userInput) {
       );
     },
     save: function () {
-      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'stf-semantic-blockquote__figcaption' });
       return wp.element.createElement(
         'figcaption',
-        blockProps,
+        { className: 'wp-semantic-figure__caption' },
         wp.element.createElement(InnerBlocks.Content, null)
       );
     },
@@ -258,6 +257,7 @@ function buildUserClass(userInput) {
       html: false,
       anchor: true,
       align: ['wide', 'full'],
+      className: false,
     },
     edit: function (props) {
       var clientId = props.clientId;
@@ -265,7 +265,7 @@ function buildUserClass(userInput) {
       var showCaption = attrs.showCaption !== false;
       var setAttributes = props.setAttributes;
 
-      var blockProps = useBlockProps({ className: 'stf-semantic-blockquote' });
+      var blockProps = useBlockProps({ className: 'wp-semantic-figure wp-block-semantic-blockquote' });
 
       var innerBlocks = useSelect(
         function (select) {
@@ -338,7 +338,7 @@ function buildUserClass(userInput) {
       );
     },
     save: function () {
-      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'stf-semantic-blockquote' });
+      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'wp-semantic-figure wp-block-semantic-blockquote' });
       return wp.element.createElement(
         'figure',
         blockProps,

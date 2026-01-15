@@ -3,7 +3,7 @@
 Contributors:      Telex - https://telex.automattic.ai/projects/85965f99
 Tags:              semantic, quote, citation, abbreviation, definition
 Tested up to:      6.9
-Stable tag:        1.5.0
+Stable tag:        1.5.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Author:            Stephen Walker
@@ -103,7 +103,6 @@ When you apply the quote format to your text, a popup will appear where you can 
 * Figcaption content uses real blocks (Paragraph, Heading, List), enabling links and other inline formatting.
 * Added a toggle to include/remove the figcaption wrapper.
 * Version correction
-
 = 1.1.0 =
 * Added language attribute support for inline quotes
 * Added citation URL support for inline quotes
