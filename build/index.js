@@ -151,3 +151,199 @@ function buildUserClass(userInput) {
     edit: InlineSpanEdit,
   });
 })(window.wp);
+
+; (function (wp) {
+  // Semantic Blockquote block (figure > blockquote + optional figcaption)
+  if (!wp || !wp.blocks || !wp.blockEditor || !wp.components || !wp.element || !wp.i18n || !wp.data) {
+    return;
+  }
+
+  var registerBlockType = wp.blocks.registerBlockType;
+  var createBlock = wp.blocks.createBlock;
+  var InnerBlocks = wp.blockEditor.InnerBlocks;
+  var useBlockProps = wp.blockEditor.useBlockProps;
+  var InspectorControls = wp.blockEditor.InspectorControls;
+  var PanelBody = wp.components.PanelBody;
+  var ToggleControl = wp.components.ToggleControl;
+  var __ = wp.i18n.__;
+
+  var useSelect = wp.data.useSelect;
+  var useDispatch = wp.data.useDispatch;
+
+  var PARENT = 'semantic-text-formats/semantic-blockquote';
+  var QUOTE = 'semantic-text-formats/semantic-blockquote-quote';
+  var CAPTION = 'semantic-text-formats/semantic-blockquote-caption';
+
+  // Child: quote wrapper
+  registerBlockType(QUOTE, {
+    title: __('Semantic Blockquote: Quote', 'semantic-text-formats'),
+    description: __('Inner block used by Semantic Blockquote (do not insert directly).', 'semantic-text-formats'),
+    category: 'text',
+    icon: 'format-quote',
+    parent: [PARENT],
+    supports: {
+      reusable: false,
+      html: false,
+      inserter: false,
+      lock: false,
+    },
+    edit: function (props) {
+      var blockProps = useBlockProps({ className: 'stf-semantic-blockquote__blockquote' });
+      return wp.element.createElement(
+        'blockquote',
+        blockProps,
+        wp.element.createElement(InnerBlocks, {
+          allowedBlocks: ['core/paragraph', 'core/heading', 'core/list'],
+          template: [['core/paragraph', { placeholder: __('Add quote…', 'semantic-text-formats') }]],
+          templateLock: false,
+        })
+      );
+    },
+    save: function () {
+      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'stf-semantic-blockquote__blockquote' });
+      return wp.element.createElement(
+        'blockquote',
+        blockProps,
+        wp.element.createElement(InnerBlocks.Content, null)
+      );
+    },
+  });
+
+  // Child: figcaption wrapper
+  registerBlockType(CAPTION, {
+    title: __('Semantic Blockquote: Figcaption', 'semantic-text-formats'),
+    description: __('Inner block used by Semantic Blockquote (do not insert directly).', 'semantic-text-formats'),
+    category: 'text',
+    icon: 'editor-quote',
+    parent: [PARENT],
+    supports: {
+      reusable: false,
+      html: false,
+      inserter: false,
+      lock: false,
+    },
+    edit: function () {
+      var blockProps = useBlockProps({ className: 'stf-semantic-blockquote__figcaption' });
+      return wp.element.createElement(
+        'figcaption',
+        blockProps,
+        wp.element.createElement(InnerBlocks, {
+          // Full paragraph block functionality (and any inline formats allowed by that block).
+          allowedBlocks: ['core/paragraph', 'core/heading', 'core/list'],
+          template: [['core/paragraph', { placeholder: __('Add source / attribution…', 'semantic-text-formats') }]],
+          templateLock: false,
+        })
+      );
+    },
+    save: function () {
+      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'stf-semantic-blockquote__figcaption' });
+      return wp.element.createElement(
+        'figcaption',
+        blockProps,
+        wp.element.createElement(InnerBlocks.Content, null)
+      );
+    },
+  });
+
+  // Parent: figure wrapper with toggle to include/remove figcaption
+  registerBlockType(PARENT, {
+    title: __('Semantic Blockquote', 'semantic-text-formats'),
+    description: __('A blockquote wrapped in a figure with an optional figcaption that supports full Paragraph block features.', 'semantic-text-formats'),
+    category: 'text',
+    icon: 'format-quote',
+    attributes: {
+      showCaption: { type: 'boolean', default: true },
+    },
+    supports: {
+      html: false,
+      anchor: true,
+      align: ['wide', 'full'],
+    },
+    edit: function (props) {
+      var clientId = props.clientId;
+      var attrs = props.attributes || {};
+      var showCaption = attrs.showCaption !== false;
+      var setAttributes = props.setAttributes;
+
+      var blockProps = useBlockProps({ className: 'stf-semantic-blockquote' });
+
+      var innerBlocks = useSelect(
+        function (select) {
+          return select('core/block-editor').getBlocks(clientId);
+        },
+        [clientId]
+      );
+
+      var hasCaptionBlock = (innerBlocks || []).some(function (b) { return b && b.name === CAPTION; });
+
+      var dispatch = useDispatch('core/block-editor');
+
+      function ensureCaption(nextShow) {
+        var blocks = innerBlocks || [];
+
+        // Ensure quote wrapper exists.
+        var hasQuote = blocks.some(function (b) { return b && b.name === QUOTE; });
+        if (!hasQuote) {
+          blocks = [createBlock(QUOTE)];
+        }
+
+        if (nextShow) {
+          if (!blocks.some(function (b) { return b && b.name === CAPTION; })) {
+            blocks = blocks.concat([createBlock(CAPTION)]);
+          }
+        } else {
+          blocks = blocks.filter(function (b) { return b && b.name !== CAPTION; });
+        }
+
+        dispatch.replaceInnerBlocks(clientId, blocks, false);
+      }
+
+      // On first render, seed template if empty.
+      if (!innerBlocks || innerBlocks.length === 0) {
+        ensureCaption(showCaption);
+      }
+
+      return wp.element.createElement(
+        wp.element.Fragment,
+        null,
+        wp.element.createElement(
+          InspectorControls,
+          null,
+          wp.element.createElement(
+            PanelBody,
+            { title: __('Semantic Blockquote', 'semantic-text-formats'), initialOpen: true },
+            wp.element.createElement(ToggleControl, {
+              label: __('Show figcaption', 'semantic-text-formats'),
+              checked: !!showCaption,
+              onChange: function (val) {
+                setAttributes({ showCaption: !!val });
+                ensureCaption(!!val);
+              },
+              help: __('Turn off to remove the figcaption wrapper entirely.', 'semantic-text-formats'),
+            })
+          )
+        ),
+        wp.element.createElement(
+          'figure',
+          blockProps,
+          wp.element.createElement(InnerBlocks, {
+            allowedBlocks: [QUOTE, CAPTION],
+            template: showCaption
+              ? [[QUOTE], [CAPTION]]
+              : [[QUOTE]],
+            templateLock: 'all',
+            renderAppender: false,
+          })
+        )
+      );
+    },
+    save: function () {
+      var blockProps = wp.blockEditor.useBlockProps.save({ className: 'stf-semantic-blockquote' });
+      return wp.element.createElement(
+        'figure',
+        blockProps,
+        wp.element.createElement(InnerBlocks.Content, null)
+      );
+    },
+  });
+})(window.wp);
